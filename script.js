@@ -87,8 +87,8 @@ async function getAllWeather(city) {
       const weatherObject = {
          cityName, clouds, wind, humidity, tempObj
       }
-      // createApp(weatherObject)
-      console.log(weatherObject)
+      createApp(weatherObject)
+      // console.log(weatherObject)
 
    } catch (err) {
       console.log(err)
@@ -101,15 +101,36 @@ const searchForm = document.forms.search
 
 searchForm.addEventListener('submit', async (e) => {
    e.preventDefault()
-   let tempParagraph = document.querySelector('.current-temp p')
-   let temp = await getTemp('minsk')
-   tempParagraph.textContent = `${temp.temperature}°C`
+   const searchInput = document.getElementById('search-input')
+   const cityName = searchInput.value
+   await getAllWeather(cityName)
 })
 
 
 function createApp(weatherObject) {
 
-   let currentTemp = document.querySelector('.current-temp p')
-   currentTemp.innerText = ` ${weatherObject.tempObj.temperature}°C`
+   const cityName = document.getElementById('city')
+   cityName.textContent = weatherObject.cityName
+
+   const currentTemp = document.querySelector('.current-temp p')
+   currentTemp.textContent = `${weatherObject.tempObj.temperature}°C`
+
+   const maxTemp = document.querySelector('.max-temp p')
+   maxTemp.textContent = `${weatherObject.tempObj.temp_max}°C`
+
+   const minTemp = document.querySelector('.min-temp p')
+   minTemp.textContent = `${weatherObject.tempObj.temp_min}°C`
+
+   const feelsLike = document.querySelector('.info-feel p')
+   feelsLike.textContent = `Feels like: ${weatherObject.tempObj.feels_like}°C`
+
+   const clouds = document.querySelector('.info-clouds p')
+   clouds.textContent = `Clouds: ${weatherObject.clouds}`
+
+   const humidity = document.querySelector('.info-humidity p')
+   humidity.textContent = `Humidity: ${weatherObject.humidity}%`
+
+   const wind = document.querySelector('.info-wind p')
+   wind.textContent = `Wind: ${weatherObject.wind} m/s`
 
 }
