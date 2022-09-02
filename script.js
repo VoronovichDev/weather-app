@@ -19,7 +19,7 @@ async function getTemp(city) {
          temp_max: Math.round(cityInfo.main.temp_max),
          temp_min: Math.round(cityInfo.main.temp_min),
       }
-      console.log(tempObj)
+      return tempObj
    }
    catch (err) {
       console.log(err)
@@ -31,7 +31,7 @@ async function getHumidity(city) {
    try {
       const cityInfo = await getWeather(city);
       humidity = cityInfo.main.humidity;
-      console.log(humidity)
+      return humidity
    }
    catch (err) {
       console.log(err)
@@ -43,7 +43,7 @@ async function getWind(city) {
    try {
       const cityInfo = await getWeather(city);
       const windSpeed = cityInfo.wind.speed;
-      console.log(windSpeed)
+      return windSpeed
    }
    catch (err) {
       console.log(err)
@@ -55,7 +55,7 @@ async function getClouds(city) {
    try {
       const cityInfo = await getWeather(city);
       clouds = cityInfo.weather[0].description;
-      console.log(clouds)
+      return clouds
    }
    catch (err) {
       console.log(err)
@@ -67,16 +67,49 @@ async function getCity(city) {
    try {
       const cityInfo = await getWeather(city)
       const cityName = cityInfo.name
-      // console.log(cityName)
-      console.log(cityName)
+      return cityName
    }
    catch (err) {
       console.log(err)
    }
 }
 
-getTemp('Paris')
-getHumidity('Paris')
-getWind('Paris')
-getClouds('Paris')
-getCity('Paris')
+// grouping all weather data
+
+async function getAllWeather(city) {
+   try {
+      let cityName = await getCity(city)
+      let clouds = await getClouds(city)
+      let wind = await getWind(city)
+      let humidity = await getHumidity(city)
+      let tempObj = await getTemp(city)
+
+      const weatherObject = {
+         cityName, clouds, wind, humidity, tempObj
+      }
+      // createApp(weatherObject)
+      console.log(weatherObject)
+
+   } catch (err) {
+      console.log(err)
+   }
+}
+
+getAllWeather('paris')
+
+const searchForm = document.forms.search
+
+searchForm.addEventListener('submit', async (e) => {
+   e.preventDefault()
+   let tempParagraph = document.querySelector('.current-temp p')
+   let temp = await getTemp('minsk')
+   tempParagraph.textContent = `${temp.temperature}°C`
+})
+
+
+function createApp(weatherObject) {
+
+   let currentTemp = document.querySelector('.current-temp p')
+   currentTemp.innerText = ` ${weatherObject.tempObj.temperature}°C`
+
+}
