@@ -8,7 +8,53 @@
    <title>Weather app</title>
 </head>
 <body>
-
-   <script src="script.js"></script>
+   <div id="container">
+      <header>
+         <h1>What's the weather today?</h1>
+      </header>
+      <main>
+         <form name="search" autocomplete="off">
+            <input type="search" id="search-input">
+            <button id="search-button">Find city</button>
+         </form>
+         <div id="weather">
+            <h2 id="city">Paris</h2>
+            <div id="weather-temp">
+               <div class="current-temp">
+                  <img src="img/temp_bar.svg" alt="temp">
+                  <p>20°C</p>
+               </div>
+               <div class="max-temp">
+                  <img src="img/max_temp.svg" alt="max">
+                  <p>23°C</p>
+               </div>
+               <div class="min-temp">
+                  <img src="img/min_temp.svg" alt="min">
+                  <p>17°C</p>
+               </div>
+            </div>
+            <div id="weather-info">
+               <div class="info-feel">
+                  <img src="img/feels_like.svg" alt="feels like">
+                  <p id="feels-like"> Feels like: 21°C</p>
+               </div>
+               <div class="info-clouds">
+                  <img src="img/clouds.svg" alt="clouds">
+                  <p id="clouds">Clouds: overcast clouds</p>
+               </div>
+               <div class="info-humidity">
+                  <img src="img/humidity.svg" alt="humidity">
+                  <p id="wind">Humidity: 50%</p>
+               </div>
+               <div class="info-wind">
+                  <img src="img/wind.svg" alt="wind">
+                  <p id="wind">Wind: 3.5 m/s</p>
+               </div>
+            </div>
+         </div>
+      </main>
+      <footer>Made by VoronovichDev</footer>
+   </div>
+   <!-- <script src="script.js"></script> -->
 </body>
 </html>

@@ -67,6 +67,7 @@ async function getCity(city) {
    try {
       const cityInfo = await getWeather(city)
       const cityName = cityInfo.name
+      // console.log(cityName)
       console.log(cityName)
    }
    catch (err) {
